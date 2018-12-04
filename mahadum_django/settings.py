@@ -25,7 +25,7 @@ SECRET_KEY = 'jkncqm9c092cx+w3juq9d@j_$+6$hl5)#p1gx*gkjsm_o@(mb5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["http://lawcham.com", "http://:www.lawcham.com"]
 
 
 # Application definition
