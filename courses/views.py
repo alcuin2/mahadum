@@ -24,6 +24,7 @@ def get_all_courses(request):
         return JsonResponse({"statusMsg": "Please, use GET method"}, status=400)
 
 
+@csrf_exempt
 def get_course_details(request):
 
     if request.method == "POST":
