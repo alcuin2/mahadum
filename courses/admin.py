@@ -36,6 +36,7 @@ class LessonAdmin(admin.ModelAdmin):
     list_display = (
         "title",
         "course",
+        "id",
         "linked_intro_video",
         "linked_body_pdf",
         "lesson_number"
