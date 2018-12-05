@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from authentication.views import *
 from main.views import register_course, start_lesson
+from courses.views import *
 
 admin.site.site_header = "Mahadum Admin"
 
@@ -28,5 +29,7 @@ urlpatterns = [
     url(r'^api/parent/password/change', change_parent_password),
     url(r'^api/parent/password/validate', validate_parent_password),
     url(r'^api/kid/lesson/start', start_lesson),
+    url(r'^api/courses/all', get_all_courses),
+    url(r'^api/courses/detail', get_course_details),
     url(r'^admin/', admin.site.urls)
 ]
