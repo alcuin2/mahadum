@@ -46,6 +46,7 @@ def start_lesson(request):
                 new_tracker.save()
                 reg_course.tracker = new_tracker
                 reg_course.save()
+                return JsonResponse({"statusMsg": "Lesson registered"}, status=200)
 
         except:
             return JsonResponse({"statusMsg": "Failed, check ids."}, status=400)
