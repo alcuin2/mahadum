@@ -49,3 +49,6 @@ def start_lesson(request):
 
         except:
             return JsonResponse({"statusMsg": "Failed, check ids."}, status=400)
+
+    else:
+        return JsonResponse({"statusMsg": "Please, use POST method"}, status=400)
