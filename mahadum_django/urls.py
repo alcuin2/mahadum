@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^api/kid/lesson/start', start_lesson),
     url(r'^api/courses/all', get_all_courses),
     url(r'^api/courses/detail', get_course_details),
+    url(r'^api/teacher/create', create_teacher),
     url(r'api/teacher/login', teacher_login),
     url(r'^admin/', admin.site.urls)
 ]

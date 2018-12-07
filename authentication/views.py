@@ -151,6 +151,31 @@ def validate_parent_password(request):
 
 
 @csrf_exempt
+def create_teacher(request):
+
+    if request.method == "POST":
+        body = json.loads(request.body)
+        try:
+            school = School.objects.get(id=body["school_id"])
+            teacher = Teacher(
+                email=body['email'],
+                first_name=body['first_name'],
+                surname=body['surname'],
+                mobile=body['mobile'],
+                school=school
+            )
+            teacher.password = pbkdf2_sha256.hash(body['password'])
+            teacher.save()
+            return JsonResponse({"statusMsg": "New Teacher created", "id": teacher.id, "Email": teacher.email, "first_name": teacher.first_name,
+                                 "surname": teacher.surname, "mobile": teacher.mobile})
+        except IntegrityError:
+            return JsonResponse({"statusMsg": "Email already exists"}, status=400)
+
+    else:
+        return JsonResponse({"statusMsg": "Please, use POST method"}, status=400)
+
+
+@csrf_exempt
 def teacher_login(request):
 
     if request.method == "POST":
