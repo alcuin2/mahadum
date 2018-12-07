@@ -3,7 +3,7 @@ from passlib.hash import pbkdf2_sha256
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
-from authentication.models import Parent
+from authentication.models import Parent, Teacher, School
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse
 from django.db import IntegrityError
@@ -146,5 +146,37 @@ def validate_parent_password(request):
         except:
             return JsonResponse({"statusMsg": "Parent not found"}, status=400)
 
+    else:
+        return JsonResponse({"statusMsg": "Please, use POST method"}, status=400)
+
+
+@csrf_exempt
+def teacher_login(request):
+
+    if request.method == "POST":
+        body = json.loads(request.body)
+
+        try:
+            teacher = Teacher.objects.get(email=body['email'])
+            password = body['password']
+
+            if pbkdf2_sha256.verify(password, teacher.password):
+                courses = RegisteredCourse.objects.filter(
+                    course=teacher.course, school=teacher.school)
+                list_of_kids = []
+                for course in courses:
+                    data = {}
+                    data["name"] = course.kid.name
+                    data["parent"] = course.kid.parent.first_name + \
+                        " " + course.kid.parent.surname
+                    data["course"] = course.course.title
+                    list_of_kids.append(data)
+                return JsonResponse({"statusMsg": "Teacher Login", "Kids": list_of_kids}, status=200)
+
+            else:
+                return JsonResponse({"statusMsg": "Login Failed"}, status=400)
+
+        except:
+            return JsonResponse({"statusMsg": "Login Failed"}, status=400)
     else:
         return JsonResponse({"statusMsg": "Please, use POST method"}, status=400)

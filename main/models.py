@@ -30,6 +30,7 @@ class Tracker(models.Model):
 class RegisteredCourse(models.Model):
 
     kid = models.ForeignKey(Kid, on_delete=models.CASCADE)
+    school = models.ForeignKey(School, on_delete=models.CASCADE, null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     tracker = models.ForeignKey(
         Tracker, on_delete=models.CASCADE, null=True, editable=False)

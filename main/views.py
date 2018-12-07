@@ -16,7 +16,11 @@ def register_course(request):
             kid = Kid.objects.get(id=body['kid_id'])
             if len(RegisteredCourse.objects.filter(
                     kid=kid, course=course)) == 0:
-                new_course = RegisteredCourse(course=course, kid=kid)
+                if kid.school:
+                    new_course = RegisteredCourse(
+                        course=course, kid=kid, school=kid.scholl)
+                else:
+                    new_course = RegisteredCourse(course=course, kid=kid)
                 new_course.save()
                 return JsonResponse({"statusMsg": "Course registered for kid"}, status=200)
             else:
