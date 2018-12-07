@@ -37,3 +37,21 @@ class RegisteredCourse(models.Model):
 
     def __str__(self):
         return self.kid
+
+
+class Book(models.Model):
+
+    cover = models.URLField(help_text="Link to book cover image")
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def cover_link(self):
+        return format_html(
+            '<a href="{}" target="_blank ">{}</a>',
+            self.cover,
+            self.cover
+        )
+
+    def __str__(self):
+        return self.title

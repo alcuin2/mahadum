@@ -1,6 +1,7 @@
 from django.contrib import admin
-from main.models import Kid, RegisteredCourse
+from main.models import Kid, RegisteredCourse, Book
 from authentication.models import Parent
+from django.utils.html import format_html
 
 
 def number_of_courses(obj):
@@ -44,5 +45,16 @@ class RegisteredCourseAdmin(admin.ModelAdmin):
     )
 
 
+class BookAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "title",
+        "author",
+        "price",
+        "cover_link"
+    )
+
+
 admin.site.register(Kid, KidAdmin)
 admin.site.register(RegisteredCourse, RegisteredCourseAdmin)
+admin.site.register(Book, BookAdmin)
