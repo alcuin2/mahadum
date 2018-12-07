@@ -58,3 +58,6 @@ class BookAdmin(admin.ModelAdmin):
 admin.site.register(Kid, KidAdmin)
 admin.site.register(RegisteredCourse, RegisteredCourseAdmin)
 admin.site.register(Book, BookAdmin)
+
+
+#
