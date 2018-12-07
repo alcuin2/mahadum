@@ -33,6 +33,7 @@ class SchoolAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "address",
+        "id",
         "email",
         "mobile",
         number_of_kids
