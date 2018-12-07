@@ -42,7 +42,7 @@ class Teacher(models.Model):
     first_name = models.CharField(max_length=200)
     surname = models.CharField(max_length=200)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=200, editable=False)
+    password = models.CharField(max_length=200)
     mobile = models.CharField(max_length=15)
 
     def __str__(self):
